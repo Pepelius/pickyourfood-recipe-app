@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from "react";
+import {BrowserRouter} from "react-router-dom";
+
+// Importing views
+import Pages from "./pages/Pages";
+import Meals from "./components/Meals";
+import Search from "./components/Search";
+import Navigation from "./components/Navigation";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Navigation />
+                <Search />
+                <Meals />
+                <Pages />
+            </BrowserRouter>
+
+            <section id="recipes">
+
+            </section>
+        </div>
+    );
 }
 
 export default App;

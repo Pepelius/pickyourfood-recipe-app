@@ -1,0 +1,10 @@
+.recipe.card {
+
+}
+.recipe.card .card-title {
+
+}
+.recipe.card .image {
+    height: 300px;
+    object-fit: cover;
+}

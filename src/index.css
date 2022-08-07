@@ -1,8 +1,21 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Roboto+Condensed:wght@300;400;600;700&family=Roboto:wght@100;400;700&display=swap');
+:root {
+  --color-primary: #efebe9;
+  --color-primary-light: #fff;
+  --color-primary-dark: #bdb9b7;
+
+  --color-secondary: #c5e1a5;
+  --color-secondary-light: #f8ffd7;
+  --color-secondary-dark: #94af76;
+}
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--color-primary);
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
