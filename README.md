@@ -1,70 +1,30 @@
-# Getting Started with Create React App
-
+# Pick Your Food - Recipe Browser
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## App Description
+Pick Your Food is a simple recipe browser that's built with React, using free open-source data received through [Edamam's Recipe Search API](https://developer.edamam.com/edamam-recipe-api).\
+The App consists of:
+- Home page, where the user sees randomly picked recipe suggestions, presented in a slider.
+- Recipe search, where the user can freely search for recipes using a keyword.
+- Meal filter, where the user can get randomized suggestions for the chosen meal type.
+- Your Picks, a list of recipes the user has saved as a collection.
 
-In the project directory, you can run:
+## Use of localStorage
+This app utilizes your browser's localStorage to store data, like **user's picked recipes** and randomized recipe suggestions on
+front page (to prevent the API from reaching it's Free-tier request limitations).
 
-### `npm start`
+## Additional libraries
+These are the libraries that I've decided to use in this project for additional styling and/or improved functionality.
+- [Bootstrap 5.2](https://getbootstrap.com/)
+- [framer-motion](https://www.framer.com/motion/) - provides simple transition animations when switching views.
+- [Splide](https://splidejs.com/) - a lightweight slider for the home page's recommendations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## .env
+This file is used to store app sensitive data, like APP_ID and API_KEY in the case of this app. It would normally be left out from git, but as the information here is required to test the app, it is in this case included with the repository. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Limitations
+- API Requests are limited to 10 requests per minute, 20 results per fetch.
+- API doesn't provide an ID for the recipes directly (as a workaround, it is received by splitting the recipe's uri, where the ID can be located)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Known issues
+- Navigating through the app (views) makes the API to lock-up (net::ERR_FAILED_429). The Issue is diagnosed to act as a response for sending too many GET requests to the API (10 calls/minute on Free-tier access).
