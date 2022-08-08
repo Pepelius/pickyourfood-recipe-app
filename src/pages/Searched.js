@@ -36,21 +36,38 @@ function Searched() {
                 exit={{opacity: 0}}
                 transition={{duration: .5}}
             >
-                <List>
-                    {searchResults.map((item) => {
-                        // Splitting the uri value in order to get an ID, which the API doesn't
-                        // provide directly...
-                        let id = item.recipe.uri.split("_")[1];
-                        return (
-                            <Card key={id}>
-                                <Link to={'/recipe/' + id}>
-                                    <img src={item.recipe.image} alt={"Picture of " + item.recipe.label}/>
-                                    <h4>{item.recipe.label}</h4>
-                                </Link>
-                            </Card>
-                        );
-                    })}
-                </List>
+                <section id="recipes-by-search" className="recipe-list py-4">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="row mb-3 justify-content-between">
+                                <div className="col-auto">
+                                    <h2>Search results for "{params.search}"</h2>
+                                </div>
+                            </div>
+                            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                                {searchResults.map((item) => {
+                                    // Splitting the uri value in order to get an ID, which the API doesn't
+                                    // provide directly...
+                                    let id = item.recipe.uri.split("_")[1];
+                                    return (
+                                        <div className="col" key={id}>
+                                            <div className="card">
+                                                <Link to={'/recipe/' + id}>
+                                                    <img src={item.recipe.image} alt={"Picture of " + item.recipe.label}/>
+                                                    <h4>{item.recipe.label}</h4>
+                                                    <div className="labels">
+                                                        <div className="badge bg-secondary">{parseInt(item.recipe.calories)} kcal</div>
+                                                    </div>
+                                                    <div className="overlay"></div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </motion.div>
         );
     }

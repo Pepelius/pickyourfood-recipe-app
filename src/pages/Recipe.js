@@ -1,8 +1,9 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {RiHeart2Line, RiHeart2Fill} from 'react-icons/ri';
 import {motion} from 'framer-motion';
-import styled from "styled-components";
+import Swal from "sweetalert2";
 
 function Recipe() {
     const [details, setDetails] = useState(null);
@@ -21,20 +22,46 @@ function Recipe() {
     // Handler for saving the selected recipe to user's picks (localStorage)
     const saveRecipeHandler = (e) => {
         e.preventDefault();
+        const recipe = e.currentTarget.id;
 
-        let savedRecipes = JSON.parse(localStorage.getItem('user-picks'));
-        // Checking if or not there are existing entries saved to localStorage
-        // If not, create an empty array for new entries
-        if (savedRecipes == null) savedRecipes = [];
+        if (!localStorage.getItem('user-picks')) {
+            localStorage.setItem('user-picks', '[]');
+        }
 
-        // Preparing data for the array
-        let entry = {
-            "id": e.currentTarget.id
-        };
-
-        // Pushing selected recipe to savedRecipes array
-        savedRecipes.push(entry);
-        localStorage.setItem('user-picks', JSON.stringify(savedRecipes));
+        const entries = JSON.parse(localStorage.getItem('user-picks'));
+        let exist = false;
+        // Go through saved entries and toggle exists if the id is already stored
+        for (let i = 0; i < entries.length; i++) {
+            if (entries[i].id == recipe) {
+                exist = true;
+                break;
+            }
+        }
+        // If no existing entry is found for selected id, push it to the array
+        if (!exist) {
+            entries.push({id: recipe});
+            // Store the recipe's id to localStorage
+            localStorage.setItem('user-picks', JSON.stringify(entries));
+            // Alert for a successful save
+            Swal.fire({
+                title: "<strong>Recipe saved!</strong>",
+                html: "<i>You can now find this recipe under <strong>Your Picks</strong>!</i>",
+                icon: 'success',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+            e.currentTarget.setAttribute('disabled','');
+        } else {
+            Swal.fire({
+                title: "<strong>You have already picked this recipe!</strong>",
+                html: "<i>Check <strong>Your Picks</strong> to view your collection of picked recipes.</i>",
+                icon: 'error',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        }
     }
 
     useEffect(() => {
@@ -56,74 +83,67 @@ function Recipe() {
                 exit={{opacity: 0}}
                 transition={{duration: .5}}
             >
-                <DetailWrapper>
-                    <div>
-                        <h2>{details.recipe.label}</h2>
-                        <img src={details.recipe.image} alt="Test"/>
-                    </div>
-                    <Info>
-                        <Button className={activeTab === 'ingredients' ? 'active' : ''} onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
-                        <Button className={activeTab === 'nutrition' ? 'active' : ''} onClick={() => setActiveTab('nutrition')}>Nutrition</Button>
-                        <a className="btn btn-default" href={details.recipe.url} target="_blank">Instructions</a>
+                <section id="inspect-recipe" className="py-4">
+                    <div className="row g-5">
+                        <div className="col-sm-5">
+                            <div className="recipe-image">
+                                <img src={details.recipe.image} className="img-fluid" alt="Image of the complete dish"/>
+                            </div>
+                        </div>
+                        <div className="col-sm-7">
+                            <div className="row justify-content-between">
+                                <div className="col-auto">
+                                    <ul className="nav">
+                                        <li className="nav-item me-2">
+                                            <a className={activeTab === 'ingredients' ? 'nav-link active' : 'nav-link'} onClick={() => setActiveTab('ingredients')}>Ingredients</a>
+                                        </li>
+                                        <li className="nav-item me-2">
+                                            <a className={activeTab === 'nutrition' ? 'nav-link active' : 'nav-link'} onClick={() => setActiveTab('nutrition')}>Nutrition</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href={details.recipe.url} target="_blank">Instructions</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col-auto">
+                                    <button className="btn btn-lg btn-success" onClick={saveRecipeHandler} id={id}>
+                                        <RiHeart2Line className="me-2" />
+                                        Pick
+                                    </button>
+                                </div>
+                            </div>
 
-                        {activeTab === 'ingredients' && (
-                            <ul>
-                                {details.recipe.ingredients.map((ingredient, index) =>
-                                    <li key={index}>
-                                        {ingredient.text}
-                                    </li>
-                                )}
-                            </ul>
-                        )}
+                            <hr />
+                            <h2>{details.recipe.label}</h2>
 
-                        {activeTab === 'nutrition' && (
-                            <div>
-                                <p>{parseInt(details.recipe.calories)} kcal</p>
+                            {activeTab === 'ingredients' && (
                                 <ul>
-                                    {details.recipe.digest.map((nutrient, index) =>
+                                    {details.recipe.ingredients.map((ingredient, index) =>
                                         <li key={index}>
-                                            <strong>{nutrient.label}</strong>: {parseInt(nutrient.daily)} {nutrient.unit}
+                                            {ingredient.text}
                                         </li>
                                     )}
                                 </ul>
-                            </div>
-                        )}
-                    </Info>
-                    <button className="btn btn-success" onClick={saveRecipeHandler} id={id}>Pick</button>
-                </DetailWrapper>
+                            )}
+
+                            {activeTab === 'nutrition' && (
+                                <div>
+                                    <p>{parseInt(details.recipe.calories)} kcal</p>
+                                    {details.recipe.digest.map((nutrient, index) =>
+                                        <span className="nutrient" key={index}>
+                                            <strong>{nutrient.label}</strong>: {parseInt(nutrient.daily)} {nutrient.unit}{index == details.recipe.digest.length-1 ? '' : ', '}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
             </motion.div>
         );
     }
 
 
 }
-
-// styled components
-const DetailWrapper = styled.div `
-  display: flex;
-  margin: 10rem 0 5rem;
-  
-  .active {
-    background: var(--color-secondary);
-  }
-  h2 { margin-bottom: 1.5rem; }
-  ul {
-    margin-top: 2rem;
-  }
-  li {
-    font-size: 1.2rem;
-    line-height: 2.5rem;
-  }
-`;
-const Button = styled.button `
-  background: var(--color-primary-light);
-  padding: 1rem 2rem;
-  color: #313131;
-  border: 2px solid var(--color-primary);
-  margin-right: 1rem;
-`;
-const Info = styled.div `
-  margin-left: 10rem;    
-`;
 
 export default Recipe;

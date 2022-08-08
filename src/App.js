@@ -4,8 +4,6 @@ import {BrowserRouter} from "react-router-dom";
 // Importing views
 import Pages from "./pages/Pages";
 import Header from "./components/Header";
-import Meals from "./components/Meals";
-import Search from "./components/Search";
 import Navigation from "./components/Navigation";
 
 function App() {
@@ -16,10 +14,6 @@ function App() {
                 <Header />
                 <Pages />
             </BrowserRouter>
-
-            <section id="recipes">
-
-            </section>
         </div>
     );
 }

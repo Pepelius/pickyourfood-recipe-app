@@ -11,7 +11,6 @@ function Home() {
             exit={{opacity: 0}}
             transition={{duration: .5}}
         >
-            <h1>Home</h1>
             <Suggestions />
         </motion.div>
     )

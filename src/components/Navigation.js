@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 function Navigation() {
     return (
         <nav className="navbar bg-transparent">
-            <div className="container-fluid">
+            <div className="container">
                 <Link className="navbar-brand" to={'/'}>
                     <GiHotMeal />
                     Pick Your Food

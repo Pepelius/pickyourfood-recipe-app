@@ -13,15 +13,17 @@ function Pages() {
     const location = useLocation();
 
     return (
-        <AnimatePresence exitBeforeEnter>
-            <Routes Location={location} key={location.pathname}>
-                <Route path="/" element={<Home />} />
-                <Route path="/category/:mealType" element={<Category />} />
-                <Route path="/searched/:search" element={<Searched />} />
-                <Route path="/recipe/:id" element={<Recipe />} />
-                <Route path="/saved" element={<Saved />} />
-            </Routes>
-        </AnimatePresence>
+        <div className="container py-5">
+            <AnimatePresence exitBeforeEnter>
+                <Routes Location={location} key={location.pathname}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/category/:mealType" element={<Category />} />
+                    <Route path="/searched/:search" element={<Searched />} />
+                    <Route path="/recipe/:id" element={<Recipe />} />
+                    <Route path="/saved" element={<Saved />} />
+                </Routes>
+            </AnimatePresence>
+        </div>
     )
 }
 

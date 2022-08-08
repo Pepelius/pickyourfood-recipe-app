@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import styled from "styled-components";
 import {motion} from 'framer-motion';
 import {Link, useParams} from 'react-router-dom';
 
@@ -33,45 +32,44 @@ function Category() {
                 exit={{opacity: 0}}
                 transition={{duration: .5}}
             >
-                <List>
-                    {category.map((item) => {
-                        // Splitting the uri value in order to get an ID, which the API doesn't
-                        // provide directly...
-                        const id = item.recipe.uri.split("_")[1];
-                        return (
-                            <Card key={id}>
-                                <Link to={'/recipe/' + id}>
-                                    <img src={item.recipe.image} alt={"Picture of " + item.recipe.label}/>
-                                    <h4>{item.recipe.label}</h4>
-                                </Link>
-                            </Card>
-                        );
-                    })}
-                </List>
+                <section id="recipes-by-meal" className="recipe-list py-4">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="row mb-3 justify-content-between">
+                                <div className="col-auto">
+                                    <h2>{params.mealType} recipes</h2>
+                                </div>
+                                <div className="col-auto">
+                                    <h2 className="styled">Here are our top picks!</h2>
+                                </div>
+                            </div>
+                            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                                {category.map((item) => {
+                                    // Splitting the uri value in order to get an ID, which the API doesn't
+                                    // provide directly...
+                                    const id = item.recipe.uri.split("_")[1];
+                                    return (
+                                        <div className="col" key={id}>
+                                            <div className="card">
+                                                <Link to={'/recipe/' + id}>
+                                                    <img src={item.recipe.image} alt={"Picture of " + item.recipe.label}/>
+                                                    <h4>{item.recipe.label}</h4>
+                                                    <div className="labels">
+                                                        <div className="badge bg-secondary">{parseInt(item.recipe.calories)} kcal</div>
+                                                    </div>
+                                                    <div className="overlay"></div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </motion.div>
         )
     }
 }
-
-// styled components
-const List = styled.section `
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 2.5rem;
-`;
-const Card = styled.div `
-  img {
-    width: 100%;
-    border-radius: 2rem;
-    object-fit: cover;
-  }
-  a {
-    text-decoration: none;
-  }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
-`;
 
 export default Category;

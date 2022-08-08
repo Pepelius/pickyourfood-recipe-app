@@ -19,6 +19,7 @@ These are the libraries that I've decided to use in this project for additional 
 - [framer-motion](https://www.framer.com/motion/) - provides simple transition animations when switching views.
 - [Splide](https://splidejs.com/) - a lightweight slider for the home page's recommendations.
 - [react-icons](https://react-icons.github.io/react-icons/) - for easy access to huge variety of icons by different providers.
+- [sweetalert2](https://sweetalert2.github.io/) - pretty, yet simple alerts for save confirmations and errors.
 
 ## .env
 This file is used to store app sensitive data, like APP_ID and API_KEY in the case of this app. It would normally be left out from git, but as the information here is required to test the app, it is in this case included with the repository. 
