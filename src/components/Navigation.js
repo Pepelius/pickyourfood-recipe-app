@@ -1,4 +1,5 @@
 import {GiHotMeal} from 'react-icons/gi';
+import {RiHeart2Line, RiHeart2Fill} from 'react-icons/ri';
 import {Link} from 'react-router-dom';
 
 function Navigation() {
@@ -10,6 +11,7 @@ function Navigation() {
                     Pick Your Food
                 </Link>
                 <Link className="btn btn-lg btn-primary" to={'/saved'}>
+                    <RiHeart2Line className="me-2" />
                     Picked Recipes
                 </Link>
             </div>

@@ -16,10 +16,14 @@ function Search() {
     }
 
     return (
-        <StyledForm onSubmit={submitHandler}>
-            <FaSearch />
-            <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
-        </StyledForm>
+        <div className="row justify-content-center">
+            <div className="col-10 col-lg-8">
+                <form className="search-bar" onSubmit={submitHandler}>
+                    <FaSearch />
+                    <input type="text" className="form-control" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search for recipes..." />
+                </form>
+            </div>
+        </div>
     );
 }
 

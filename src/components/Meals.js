@@ -4,24 +4,24 @@ import {NavLink} from 'react-router-dom';
 
 function Meals() {
     return (
-        <Categories>
-            <StyledLink to={'/category/Breakfast'}>
+        <section id="meal-select">
+            <NavLink className="btn-circle" to={'/category/Breakfast'}>
                 <GiSlicedBread />
                 <h5>Breakfast</h5>
-            </StyledLink>
-            <StyledLink to={'/category/Lunch'}>
+            </NavLink>
+            <NavLink className="btn-circle" to={'/category/Lunch'}>
                 <GiMeal />
                 <h5>Lunch</h5>
-            </StyledLink>
-            <StyledLink to={'/category/Dinner'}>
+            </NavLink>
+            <NavLink className="btn-circle" to={'/category/Dinner'}>
                 <GiFullPizza />
                 <h5>Dinner</h5>
-            </StyledLink>
-            <StyledLink to={'/category/Snack'}>
+            </NavLink>
+            <NavLink className="btn-circle" to={'/category/Snack'}>
                 <GiCupcake />
                 <h5>Snacks</h5>
-            </StyledLink>
-        </Categories>
+            </NavLink>
+        </section>
     )
 }
 
