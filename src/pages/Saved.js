@@ -2,6 +2,7 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {motion} from 'framer-motion';
+import {MdOutlineDeleteSweep} from "react-icons/md";
 
 function Saved() {
     const [recipeList, setRecipeList] = useState([]);
@@ -31,6 +32,28 @@ function Saved() {
         }
     }
 
+    // Handler for removing the selected recipe from user's picks
+    const removeRecipeHandler = (e) => {
+        e.preventDefault();
+
+        const recipe = e.currentTarget.id;
+        const entries = JSON.parse(localStorage.getItem('user-picks'));
+
+        // Forming a new array, where selected recipe id gets filtered
+        const newEntries = entries.filter(data => data.id != recipe);
+
+        // Clearing current entries
+        localStorage.removeItem('user-picks');
+        // Setting the entries again, but with the new, filtered array
+        localStorage.setItem('user-picks', JSON.stringify(newEntries));
+
+        // fetch the recipe list again after removing an entry
+        // bad practice and leads to pre-emptively reaching that 10 requests/minute limit in the API,
+        // should be done in the useEffect listening to state changes, but working with localStorage,
+        // I didn't find a method to check for changes within the saved array of objects in an entry
+        getRecipes();
+    }
+
     // Run functions as soon as this component is mounted
     useEffect(() => {
         getRecipes();
@@ -38,7 +61,7 @@ function Saved() {
 
     // Making sure we have the required data before returning
     if (!recipeList) {
-        return "Loading recipe...";
+        return "";
     } else {
         return (
             <motion.div
@@ -69,6 +92,10 @@ function Saved() {
                                                 <div className="card">
                                                     <Link to={'/recipe/' + id}>
                                                         <img src={item.recipe.image} alt={"Picture of " + item.recipe.label}/>
+                                                        <button className="btn btn-lg btn-danger remove" onClick={removeRecipeHandler} id={id}>
+                                                            <MdOutlineDeleteSweep className="me-2" />
+                                                            Remove
+                                                        </button>
                                                         <h4>{item.recipe.label}</h4>
                                                         <div className="labels">
                                                             <div className="badge bg-secondary">{parseInt(item.recipe.calories)} kcal</div>

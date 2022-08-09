@@ -3,11 +3,11 @@ import {Route, Routes, useLocation} from 'react-router-dom';
 import {AnimatePresence} from "framer-motion";
 
 // Import pages for routing
-import Home from "./Home";
-import Category from "./Category";
-import Searched from "./Searched";
-import Recipe from "./Recipe";
-import Saved from "./Saved";
+import Home from "../pages/Home";
+import Category from "../pages/Category";
+import Searched from "../pages/Searched";
+import Recipe from "../pages/Recipe";
+import Saved from "../pages/Saved";
 
 function Pages() {
     const location = useLocation();

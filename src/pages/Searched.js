@@ -2,7 +2,6 @@ import React from "react";
 import {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {motion} from 'framer-motion';
-import styled from "styled-components";
 
 function Searched() {
     const [searchResults, setSearchResults] = useState([]);
@@ -14,8 +13,6 @@ function Searched() {
     const getSearched = async (input) => {
         const data = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${input}&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}`);
         const recipes = await data.json();
-        console.log(data);
-        console.log(recipes.hits);
         setSearchResults(recipes.hits);
     }
 
@@ -27,7 +24,7 @@ function Searched() {
 
     // Making sure we have the required data before returning
     if (!searchResults) {
-        return "Searching for recipes...";
+        return "";
     } else {
         return (
             <motion.div
@@ -72,26 +69,5 @@ function Searched() {
         );
     }
 }
-
-// styled components
-const List = styled.section `
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 2.5rem;
-`;
-const Card = styled.div `
-  img {
-    width: 100%;
-    border-radius: 2rem;
-    object-fit: cover;
-  }
-  a {
-    text-decoration: none;
-  }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
-`;
 
 export default Searched;

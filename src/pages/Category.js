@@ -23,7 +23,7 @@ function Category() {
 
     // Making sure we have the required data before returning
     if (!category) {
-        return "Loading recipes...";
+        return "";
     } else {
         return (
             <motion.div

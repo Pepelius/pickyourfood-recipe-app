@@ -125,6 +125,14 @@ h2.styled {
   font-weight: 600;
   font-size: .9rem;
 }
+@media (max-width: 768px) {
+  #meal-select {
+    transform: scale(.85);
+  }
+  #meal-select .btn-circle {
+    margin: 0 .75rem;
+  }
+}
 
 /* Recipe list views */
 .recipe-list .card {
@@ -165,12 +173,10 @@ h2.styled {
   left: 1em;
   z-index: 5;
   opacity: 0;
-  height: 0;
   transition: all .15s ease-in-out;
 }
 .recipe-list .card:hover .labels, .recipe-list .card:focus .labels {
   opacity: 1;
-  height: 30px;
 }
 .recipe-list .card .labels .badge {
   display: flex;
@@ -178,12 +184,32 @@ h2.styled {
   height: 24px;
   border-radius: 1em;
 }
+.recipe-list .card button.remove {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  border-radius: 0 0 0 .5em;
+  transition: all .15s ease-in-out;
+}
+.recipe-list .card:hover button.remove, .recipe-list .card:focus button.remove {
+  opacity: 1;
+}
 .recipe-list .card .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.65));
   z-index: 2;
+}
+@media (max-width: 768px) {
+  .recipe-list .card .labels, .recipe-list .card button.remove {
+    opacity: 1;
+  }
+  .recipe-list .card h4 {
+    bottom: 25px;
+  }
 }
 
 /* Random Picks on Home page */

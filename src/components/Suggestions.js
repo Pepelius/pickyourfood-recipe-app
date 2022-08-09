@@ -24,7 +24,6 @@ function Suggestions() {
 
             // Saving the received data from API to suggestions
             setSuggestions(recipes.hits);
-            //console.log("Tulokset: ", recipes.hits.recipe.uri);
         }
     }
 
@@ -36,7 +35,7 @@ function Suggestions() {
 
     // Making sure we have the required data before returning
     if (!suggestions) {
-        return "Loading suggestions...";
+        return "";
     } else {
         return (
             <section id="random-picks" className="recipe-list py-4">

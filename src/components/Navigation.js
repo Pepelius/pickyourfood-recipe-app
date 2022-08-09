@@ -1,5 +1,5 @@
 import {GiHotMeal} from 'react-icons/gi';
-import {RiHeart2Line, RiHeart2Fill} from 'react-icons/ri';
+import {RiHeart2Line} from 'react-icons/ri';
 import {Link} from 'react-router-dom';
 
 function Navigation() {

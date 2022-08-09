@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {BrowserRouter} from "react-router-dom";
 
 // Importing views
-import Pages from "./pages/Pages";
+import Pages from "./routers/Pages";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 

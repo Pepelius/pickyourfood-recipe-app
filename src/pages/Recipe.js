@@ -1,7 +1,7 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {RiHeart2Line, RiHeart2Fill} from 'react-icons/ri';
+import {RiHeart2Line} from 'react-icons/ri';
 import {motion} from 'framer-motion';
 import Swal from "sweetalert2";
 
@@ -16,12 +16,12 @@ function Recipe() {
         const data = await fetch(`https://api.edamam.com/api/recipes/v2/${params.id}?type=public&app_id=${process.env.REACT_APP_ID}&app_key=${process.env.REACT_APP_KEY}`);
         const result = await data.json();
         setDetails(result);
-        console.log(result);
     }
 
     // Handler for saving the selected recipe to user's picks (localStorage)
     const saveRecipeHandler = (e) => {
         e.preventDefault();
+
         const recipe = e.currentTarget.id;
 
         if (!localStorage.getItem('user-picks')) {
@@ -70,7 +70,7 @@ function Recipe() {
 
     // Making sure we have the required data before returning
     if (!details) {
-        return "Loading recipe...";
+        return "";
     } else {
         // Splitting the uri value in order to get an ID, which the API doesn't
         // provide directly...
@@ -85,12 +85,12 @@ function Recipe() {
             >
                 <section id="inspect-recipe" className="py-4">
                     <div className="row g-5">
-                        <div className="col-sm-5">
+                        <div className="order-2 col-lg-5 order-lg-1">
                             <div className="recipe-image">
                                 <img src={details.recipe.image} className="img-fluid" alt="Image of the complete dish"/>
                             </div>
                         </div>
-                        <div className="col-sm-7">
+                        <div className="order-1 col-lg-7 order-lg-2">
                             <div className="row justify-content-between">
                                 <div className="col-auto">
                                     <ul className="nav">
@@ -142,8 +142,6 @@ function Recipe() {
             </motion.div>
         );
     }
-
-
 }
 
 export default Recipe;
