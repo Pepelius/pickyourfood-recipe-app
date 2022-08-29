@@ -11,9 +11,7 @@ The App consists of:
 
 ## Use of localStorage
 This app utilizes your browser's localStorage to store data, like **user's picked recipes** and randomized recipe suggestions on
-front page (to prevent the API from reaching it's Free-tier request limitations).\
-\
-I decided to work with localStorage because I wasn't sure I'd be able to implement a database solution in the given time-frame I had to develop this app.
+front page (to prevent the API from reaching it's Free-tier request limitations).
 
 ## Additional libraries
 These are the libraries that I've decided to use in this project for additional styling and/or improved functionality.
@@ -44,7 +42,7 @@ Basically a list of things (best practices) to do in order to make the app more 
 I think this project was an exciting return to React for me, as I've taken the complete React courses over two years ago, from where I wasn't able
 to recover much. Lots of Google, a couple of issues solved with the help of the wonderful React community @Discord and a lot of commitment is what it took.\
 \
-There are many things I would re-structure or think over - which I might do after this project gets checked up by the Dev-ops.\
+There are many things I would re-structure or think over - which I will return to at some point in the near future.\
 \
 My biggest regret at this point is that I didn't realize to check the limitations of the Edamam API I chose for this project beforehand. The 10 requests/minute limitation
 is very little to work with, especially since - the way I see it - fetching a list of recipes differs from fetching a single recipe by ID.\
